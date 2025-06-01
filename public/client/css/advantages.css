@@ -1,0 +1,360 @@
+* {
+  transition: .3s;
+}
+
+.contentContainer.active {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.contentContainer {
+  display: none;
+}
+
+.content {
+  position: relative;
+  z-index: 0;  
+}
+
+.content .container {
+  padding: 40px 20px 114px 20px;
+}
+
+.topButtonsDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.topButton {
+  font-family: "Exo 2";
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  border: 1px solid #EBEBEB;
+  background-color: var(--white);
+  color: var(--blue);
+  padding: 18px 64px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.topButton:hover {
+  background-color: var(--blue);
+  color: var(--white);
+  transition: .3s;
+}
+
+.topButton:active {
+  transform: scale(.85);
+  transition: .3s;
+}
+
+.topButton.active {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.topButton.active:hover {
+  background-color: #21457a;
+  transition: .3s;
+}
+
+.topTitle {
+  font-family: "Exo 2";
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 708px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.advantagesList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 53px;
+}
+
+.advantage {
+  display: flex;
+  flex-direction: column;
+}
+
+.advantageTop.active {
+  /* background-color: red; */
+  display: none;
+  transition: .3s;
+}
+
+.advantageTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 55px 50px;
+  background-color: #F5F5F7;
+  cursor: pointer;
+  border-bottom: 1px solid #EBEBEB;
+  transition: .3s;
+}
+
+.advantage:last-child {
+  border: none;
+}
+
+.advantageContent {
+  display: flex;
+  align-items: center;
+  gap: 200px;
+}
+
+.advantageContent__active {
+  display: flex;
+  gap: 185px;
+  width: 100%;
+}
+
+.advantageNumber {
+  font-family: "Exo 2";
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+  color: #C2C2C3;
+}
+
+.advantageTitle {
+  font-family: "Exo 2";
+  font-size: 32px;
+  line-height: 40px;
+  color: var(--black);
+}
+
+.accrodionArrow {
+  width: 48px;
+  height: 48px;
+  color: var(--black);
+  transition: .3s;
+}
+
+.advantageBottom {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  /* height: 550px; */
+  z-index: 1;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.advantageBottom.active {
+  height: 550px;
+  transition: .5s;
+}
+
+.advantageBottom img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.advantage__activeTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.advantageSubtitle {
+  font-family: "Inter";
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--white);
+  max-width: 465px;
+  width: 100%;
+}
+
+.accrodionArrow__active {
+  width: 48px;
+  height: 48px;
+  transform: rotate(180deg);
+  color: var(--white);
+  transition: .3s;
+}
+
+.advantageBottom__top {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 50px;
+}
+
+.advantageNumber__active {
+  font-family: "Exo 2";
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: #E9EEF6;
+}
+
+.advantageTitle__active {
+  font-family: "Exo 2";
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: var(--white);
+  width: 100%;
+}
+
+@media (max-width: 1800px) {
+  .topButton {
+    padding: 16px 48px;
+  }
+  .advantageTop, .advantageBottom__top {
+    padding: 40px;
+  }
+  .advantageContent {
+    gap: 100px;
+  }
+  .advantageContent__active {
+    gap: 85px;
+  }
+  .advantageBottom.active {
+    height: 360px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .topTitle {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .advantageBottom.active {
+    height: 300px;
+  }
+  .advantageTitle__active,.advantageTitle {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .advantage__activeTexts {
+    gap: 24px;
+  }
+  .advantageSubtitle {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .advantageContent {
+    gap: 50px;
+  }
+  .advantageContent__active {
+    gap: 45px;
+  }
+  .advantageNumber {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .advantageNumber__active {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .advantageTop, .advantageBottom__top {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 960px) {
+  .topButtonsDiv {
+    gap: 24px;
+  }
+  .topButton {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .advantageTitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .topTitle {
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: 32px;
+  }
+  .advantagesList {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topButtonsDiv {
+    gap: 12px;
+  }
+  .topButton {
+    padding: 16px 32px;
+  }
+  .accrodionArrow, .accrodionArrow__active {
+    width: 24px;
+    height: 24px;
+  }
+  .advantageTitle__active {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .advantageBottom.active {
+    height: 220px;
+  }
+  .advantage__activeTexts {
+    gap: 20px;
+  }
+  .advantageSubtitle {
+    max-width: 100%;
+  }
+  .content .container {
+    padding: 36px 0 40px 0;
+  }
+  .topTitle {
+    padding-inline: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .topButtonsDiv {
+    justify-content: flex-start;
+    overflow: scroll;
+    gap: 16px;
+    padding-inline: 20px;
+  }
+  .topButtonsDiv::-webkit-scrollbar {
+    display: none;
+  }
+  .topButton {
+    padding: 16px 40px;
+  }
+  .topTitle, .advantagesList {
+    margin-top: 24px;
+  }
+  .advantageNumber, .advantageNumber__active {
+    display: none;
+  }
+  .advantageTop {
+    border-bottom: none;
+    padding: 40px 28px;
+  }
+  .advantageBottom.active {
+    margin: 0 20px;
+    height: auto;
+  }
+  .advantageBottom__top {
+    padding: 16px 8px;
+  }
+}
