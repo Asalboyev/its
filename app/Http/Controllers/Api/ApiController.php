@@ -709,7 +709,7 @@ class ApiController extends Controller
 
             'info' => $category->info[$locale] ?? $category->info,
             'slug' => $category->slug,
-            '' => $category->children->map(function ($child) use ($locale) {
+            'children' => $category->children->map(function ($child) use ($locale) {
                 return [
                     'id' => $child->id,
                     'title' => $child->title[$locale] ?? null,
