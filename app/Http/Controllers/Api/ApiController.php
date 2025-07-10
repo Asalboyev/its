@@ -90,6 +90,7 @@ class ApiController extends Controller
                 'title' => $banner->title[$locale] ?? null,
                 'desc' => $banner->desc[$locale] ?? null,
                 'url' => $banner->url ? url($banner->url) : null,
+                'key' => $banner->key ?? null,
 
                 'images' => [
                     'lg' => $banner->lg_img,
