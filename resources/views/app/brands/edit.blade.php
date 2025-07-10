@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="title" class="form-label required">Ключ</label>
-                                    <input type="text"  class="form-control " name="key" value="{{ old('key') ?? $brand->key ?? null}}" id="title" placeholder="Ключ...">
+                                    <input type="text"  readonly class="form-control " name="key" value="{{ old('key') ?? $brand->key ?? null}}" id="title" placeholder="Ключ...">
                                     @error('key')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

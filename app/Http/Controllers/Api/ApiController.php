@@ -76,7 +76,7 @@ class ApiController extends Controller
         $locale = App::getLocale();
 
         // Faqat key ustuni null BO'LMAGAN bannerlarni olish va paginate qilish
-        $banners = Brand::whereNotNull('key')->latest()->paginate(10);
+        $banners = Brand::whereNotNull('key')->latest()->paginate(900);
 
         // Agar postlar topilmasa, 404 xatolikni qaytaradi
         if ($banners->isEmpty()) {
