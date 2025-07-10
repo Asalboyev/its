@@ -32,8 +32,8 @@ class ApiController extends Controller
         // Foydalanuvchi tilini olish
         $locale = App::getLocale();
 
-        // Postlarni oxirgi qo'shilganidan boshlab olish va 10 tadan paginate qilish
-        $banners = Brand::latest()->paginate(10);
+        // Faqat key ustuni null bo'lgan bannerlarni olish va paginate qilish
+        $banners = Brand::whereNull('key')->latest()->paginate(10);
 
         // Agar postlar topilmasa, 404 xatolikni qaytaradi
         if ($banners->isEmpty()) {
@@ -48,27 +48,69 @@ class ApiController extends Controller
                 'id' => $banner->id,
                 'title' => $banner->title[$locale] ?? null,
                 'desc' => $banner->desc[$locale] ?? null,
-                'url' => $banner->url ? url($banner->url) : null, // Katta o'lchamdagi rasm
+                'url' => $banner->url ? url($banner->url) : null,
 
                 'images' => [
-                    'lg' => $banner->lg_img, // Katta rasm uchun URL
-                    'md' => $banner->md_img, // O‘rta rasm uchun URL
-                    'sm' => $banner->sm_img, // Kichik rasm uchun URL
+                    'lg' => $banner->lg_img,
+                    'md' => $banner->md_img,
+                    'sm' => $banner->sm_img,
                 ],
             ];
         });
 
-        // Postlar va paginate ma'lumotlarini JSON formatida qaytarish
+        // JSON formatida qaytarish
         return response()->json([
-            'data' => $translatedPosts,             // Tilga mos postlar
-            'total' => $banners->total(),             // Umumiy postlar soni
-            'per_page' => $banners->perPage(),        // Har bir sahifadagi postlar soni
-            'current_page' => $banners->currentPage(), // Hozirgi sahifa raqami
-            'last_page' => $banners->lastPage(),      // Oxirgi sahifa raqami
-            'next_page_url' => $banners->nextPageUrl(), // Keyingi sahifa URLi
-            'prev_page_url' => $banners->previousPageUrl(), // Oldingi sahifa URLi
+            'data' => $translatedPosts,
+            'total' => $banners->total(),
+            'per_page' => $banners->perPage(),
+            'current_page' => $banners->currentPage(),
+            'last_page' => $banners->lastPage(),
+            'next_page_url' => $banners->nextPageUrl(),
+            'prev_page_url' => $banners->previousPageUrl(),
         ]);
     }
+
+    public function key()
+    {
+        // Foydalanuvchi tilini olish
+        $locale = App::getLocale();
+
+        // Faqat key ustuni null BO'LMAGAN bannerlarni olish va paginate qilish
+        $banners = Brand::whereNotNull('key')->latest()->paginate(10);
+
+        // Agar postlar topilmasa, 404 xatolikni qaytaradi
+        if ($banners->isEmpty()) {
+            return response()->json([
+                'message' => 'No records found'
+            ], 404);
+        }
+        $translatedPosts = collect($banners->items())->map(function ($banner) use ($locale) {
+            return [
+                'id' => $banner->id,
+                'title' => $banner->title[$locale] ?? null,
+                'desc' => $banner->desc[$locale] ?? null,
+                'url' => $banner->url ? url($banner->url) : null,
+
+                'images' => [
+                    'lg' => $banner->lg_img,
+                    'md' => $banner->md_img,
+                    'sm' => $banner->sm_img,
+                ],
+            ];
+        });
+
+        // JSON formatida qaytarish
+        return response()->json([
+            'data' => $translatedPosts,
+            'total' => $banners->total(),
+            'per_page' => $banners->perPage(),
+            'current_page' => $banners->currentPage(),
+            'last_page' => $banners->lastPage(),
+            'next_page_url' => $banners->nextPageUrl(),
+            'prev_page_url' => $banners->previousPageUrl(),
+        ]);
+    }
+
     public function get_catalogs()
     {
         // Foydalanuvchi tilini olish
@@ -511,79 +553,6 @@ class ApiController extends Controller
         return response()->json($translatedVacancy);
     }
 
-//    public function get_catalogs()
-//    {
-//        // Foydalanuvchi tilini olish
-//        $locale = App::getLocale();
-//
-//        // Postlarni oxirgi qo'shilganidan boshlab olish va 10 tadan paginate qilish
-//        $certificate = Certificate::latest()->paginate(10);
-//
-//        // Agar postlar topilmasa, 404 xatolikni qaytaradi
-//        if ($certificate->isEmpty()) {
-//            return response()->json([
-//                'message' => 'No records found'
-//            ], 404);
-//        }
-//
-//        // Postlarni foydalanuvchi tiliga moslashtirish
-//        $translatedPosts = collect($certificate->items())->map(function ($certificate) use ($locale) {
-//            return [
-//                'id' => $certificate->id,
-//                'title' => $certificate->title[$locale] ?? null, // Mahsulotning nomi (locale bo'yicha)
-//                'desc' => $certificate->desc[$locale] ?? null, // Mahsulotning ta'rifi (locale bo'yicha)
-//
-//                // Rasmning to'liq URL manzili, turli o'lchamlar uchun
-//                'photo' => [
-//                    'lg' => $certificate->img ? url('/upload/images/' . $certificate->img) : null, // Katta o'lchamdagi rasm
-//                    'md' => $certificate->img ? url('/upload/images/600/' . $certificate->img) : null, // O'rtacha o'lchamdagi rasm
-//                    'sm' => $certificate->img ? url('/upload/images/200/' . $certificate->img) : null, // Kichik o'lchamdagi rasm
-//                ],
-//                'date' => $certificate->date,
-//                'views_count' => $certificate->views_count,
-//                'slug' => $certificate->slug,
-//            ];
-//        });
-//
-//
-//        // Postlar va paginate ma'lumotlarini JSON formatida qaytarish
-//        return response()->json([
-//            'data' => $translatedPosts,             // Tilga mos postlar
-//            'total' => $certificate->total(),             // Umumiy postlar soni
-//            'per_page' => $certificate->perPage(),        // Har bir sahifadagi postlar soni
-//            'current_page' => $certificate->currentPage(), // Hozirgi sahifa raqami
-//            'last_page' => $certificate->lastPage(),      // Oxirgi sahifa raqami
-//            'next_page_url' => $certificate->nextPageUrl(), // Keyingi sahifa URLi
-//            'prev_page_url' => $certificate->previousPageUrl(), // Oldingi sahifa URLi
-//        ]);
-//    }
-//
-//    public function show_catalogs($slug)
-//    { // Foydalanuvchi tilini olish
-//        $locale = App::getLocale();
-//
-//        // Slug orqali postni olish
-//        $certificate = Certificate::where('slug', $slug)->first();
-//
-//        if (is_null($certificate)) {
-//            return response()->json(['message' => 'Post not found or URL is not null'], 404);
-//        }
-//
-//        // Postni foydalanuvchi tiliga moslashtirish
-//        $translatedPost = [
-//            'id' => $certificate->id,
-//            'title' => $certificate->title[$locale] ?? null,
-//            'desc' => $certificate->desc[$locale] ?? null,
-//            'photo' => [
-//                'lg' => $certificate->img ? url('/upload/images/' . $certificate->img) : null, // Katta o'lchamdagi rasm
-//                'md' => $certificate->img ? url('/upload/images/600/' . $certificate->img) : null, // O'rtacha o'lchamdagi rasm
-//                'sm' => $certificate->img ? url('/upload/images/200/' . $certificate->img) : null, // Kichik o'lchamdagi rasm
-//            ],
-//            'slug' => $certificate->slug,
-//        ];
-//
-//        return response()->json($translatedPost);
-//    }
 
     // start categories
     public function get_categories()

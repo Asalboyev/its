@@ -1,49 +1,48 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
-use Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Request;
 use App\Models\Lang;
 
 class LocaleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public static $mainLanguage = 'ru'; //основной язык, который не должен отображаться в URl
+    // Asosiy til
+    protected static $mainLanguage = 'en';
 
-    public static $languages = []; // Указываем, какие языки будем использовать в приложении.
+    // Tillar ro'yxati
+    protected static $languages = [];
 
-    public static function getLocale()
+    public static function getLocaleFromHeader($request)
     {
-        $uri = Request::path(); //получаем URI
+        // Tillarni Lang modelidan olish
+        self::$languages = Lang::pluck('code')->toArray();
 
-        self::$languages = array_merge(self::$languages, Lang::pluck('code')->toArray());
+        // Headerdan 'Accept-Language' ni olish
+        $locale = $request->header('Accept-Language');
 
-        $segmentsURI = explode('/',$uri); //делим на части по разделителю "/"
-
-        //Проверяем метку языка  - есть ли она среди доступных языков
-        if (!empty($segmentsURI[0]) && in_array($segmentsURI[0], self::$languages)) {
-
-            if ($segmentsURI[0] != self::$mainLanguage) return $segmentsURI[0];
-
+        // Agar headerda til ko'rsatilgan bo'lsa va u tillar ro'yxatida mavjud bo'lsa
+        if ($locale && in_array($locale, self::$languages)) {
+            return $locale; // Headerdan olingan til qaytariladi
         }
 
         return null;
     }
 
-    public function handle(\Illuminate\Http\Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        $locale = self::getLocale();
-        if($locale) \App::setLocale($locale);
-        //если метки нет - устанавливаем основной язык $mainLanguage
-        else \App::setLocale(self::$mainLanguage);
+        // Foydalanuvchining tilini headerdan olish
+        $locale = self::getLocaleFromHeader($request);
 
-        return $next($request); //пропускаем дальше - передаем в следующий посредник
+        // Agar til topilsa, uni o'rnatamiz
+        if ($locale) {
+            App::setLocale($locale);
+        } else {
+            // Aks holda asosiy tilni o'rnatamiz
+            App::setLocale(self::$mainLanguage);
+        }
+
+        return $next($request); // So'rovni keyingi middleware ga uzatamiz
     }
 }

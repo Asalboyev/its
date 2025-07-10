@@ -185,6 +185,15 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="title" class="form-label required">Ключ</label>
+                                    <input type="text"  class="form-control " name="key" value="{{ old('key') ?? $brand->key ?? null}}" id="title" placeholder="Ключ...">
+                                    @error('key')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="dropzone" class="form-label">Лого</label>
                                     <div class="dropzone dropzone-multiple" id="dropzone"></div>
                                 </div>

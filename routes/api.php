@@ -47,6 +47,8 @@ Route::middleware('locale')->group(function () {
     Route::get('/catalogs/{slug}', [ApiController::class, 'show_catalogs']);
 
     Route::get('/banners', [ApiController::class, 'get_banner']);
+    Route::get('/photo', [ApiController::class, 'key']);
+
     Route::get('/langs', [ApiController::class, 'langs']);
 
     Route::get('/categories', [ApiController::class, 'get_categories']);
