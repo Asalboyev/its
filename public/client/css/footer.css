@@ -1,0 +1,298 @@
+footer {
+  background-color: var(--black);
+  padding: 64px 20px 40px 20px;
+}
+
+.footer__inner {
+  position: relative;
+}
+
+.motto {
+  font-family: "Inter";
+  font-size: 16px;
+  line-height: 24px;
+  color: #A6A6A6;
+  max-width: 370px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.navTitle {
+  font-family: "Inter";
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+#large {
+  display: flex;
+}
+
+#mini {
+  display: none;
+}
+
+.socialMediaDiv {
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.socialMedia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  background-color: var(--blue);
+  border-radius: 50%;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.socialMedia:hover {
+  background-color: #21457a;
+  transition: .3s;
+}
+
+.sm__logo {
+  width: 34px;
+  height: 34px;
+  color: var(--white);
+}
+
+.inner__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  justify-content: space-between;
+  padding-bottom: 40px;
+} 
+
+.footer__pageNav, .footer__serviceNav, .footer__contactNav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pageNav, .serviceNav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.serviceNav .ftNavLink {
+  max-width: 150px;
+  width: 100%;
+}
+
+.locationText {
+  max-width: 400px;
+  width: 100%;
+}
+
+.contactNav {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.contactContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerSvg {
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+}
+
+.ftNavLink {
+  font-family: "Inter";
+  font-size: 18px;
+  line-height: 24px;
+  color: #A6A6A6;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.ftNavLink:hover {
+  color: var(--white);
+  transition: .3s;
+}
+
+.innner__bottom {
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  padding-top: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copyTextDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.copyText {
+  font-family: "Inter";
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--white);
+}
+
+.ndcDiv {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ndcLogoDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.ndcLogo {
+  width: 78px;
+  height: 24px;
+}
+
+.miniYear {
+  font-family: "Roboto";
+  font-size: 10px;
+  line-height: 16px;
+  color: var(--white);
+}
+
+.adTextDiv p { 
+  color: var(--white);
+}
+
+.adTextDiv span {
+  color: var(--blue);
+}
+
+.adText {
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.toTopBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.toTopBtn:hover {
+  background-color: var(--blue);
+  transition: .3s;
+}
+
+@media (max-width: 1800px) {
+  .footer__pageNav, .footer__serviceNav, .footer__contactNav {
+    gap: 16px;
+  }
+  .pageNav, .contactNav, .serviceNav {
+    gap: 12px;
+  }
+  .navTitle, .copyText {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .ftNavLink {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .socialMediaDiv {
+    margin-top: 26px;
+  }
+  .copyTextDiv {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ftNavLink, .motto {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .socialMedia {
+    width: 48px;
+    height: 48px;
+  }
+  .sm__logo {
+    width: 24px;
+    height: 24px;
+  }
+  .navTitle, .copyText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 960px) {
+  .inner__top {
+    flex-direction: column;
+    gap: 32px;
+    padding-bottom: 0;
+  }
+  .innner__bottom {
+    padding-top: 32px;
+    border-top: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .navTitle, .copyText {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .copyText {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .ndcDiv {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .ndcLogoDiv {
+    flex-direction: row;
+    align-items: center;
+    gap: 8.5px;
+  }
+  .toTopBtn {
+    top: 110px;
+  }
+  .motto {
+    margin-top: 16px;
+  }
+  #large {
+    display: none;
+  }
+  #mini {
+    display: flex;
+  }
+  .socialMediaDiv {
+    margin-top: 0;
+  }
+}

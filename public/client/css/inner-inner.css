@@ -1,0 +1,300 @@
+.mainTitlePage {
+  font-family: "Exo 2";
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 72px 20px 40px 20px;
+}
+
+.introSwiper {
+  position: relative;
+  z-index: 0;
+}
+
+.bigImage {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  background-color: var(--white);
+  border: .8px solid #EBEBEB;
+  cursor: pointer;
+}
+
+.miniImagesSection {
+  margin-top: 8px;
+  padding-inline: 20px;
+}
+
+.miniImage {
+  opacity: .5;
+  transition: .3s;
+  background-color: var(--white);
+  border: .8px solid #EBEBEB;
+  cursor: pointer;
+}
+
+.miniImage.swiper-slide-thumb-active {
+  opacity: 1;
+  border: 1px solid var(--blue);
+  transition: .3s;
+}
+
+.swiper-slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.miniImage {
+  position: relative;
+  width: 100%;
+  height: 165px;
+}
+
+.characteristicsSection {
+  padding: 104px 20px 0 20px;
+}
+
+.characteristics__inner {
+  max-width: 952px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.miniTextDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.textDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.textDiv:nth-child(2) {
+  gap: 0;
+}
+
+.textDivTitle {
+  font-family: "Exo 2";
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.textDivSubtitle {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.textDivSubtitle > p, .textDivSubtitle li, .value {
+  width: 100%;
+  font-family: "Inter";
+  font-size: 20px;
+  line-height: 32px;
+  color: #5D5D5F;
+}
+
+.textDivSubtitle > p > img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+} 
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.miniTable {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 94px;
+  padding: 32px 0;
+  border-bottom: 1px solid #EBEBEB;
+}
+
+.miniTable:last-child {
+  border-bottom: none;
+}
+
+.key {
+  width: 100%;
+  font-family: "Inter";
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #353437;
+}
+
+.section {
+  padding-bottom: 90px;
+  position: relative;
+  z-index: 0;
+}
+
+.catalogue {
+  margin-top: 72px;
+}
+
+@media (max-width: 1800px) {
+  .bigImage {
+    height: 440px;
+  }
+  .mainTitlePage, .textDivTitle {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .key {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .miniTable {
+    padding: 24px 0;
+  }
+  .value, .textDivSubtitle > p, .textDivSubtitle li {
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .catalogue {
+    margin-top: 55px;
+  }
+  .textDivSubtitle > p > img {
+    height: 340px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .bigImage {
+    height: 380px;
+  }
+  .miniImage {
+    height: 140px;
+  }
+  .characteristicsSection {
+    padding: 55px 20px 0 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .intro__inner {
+    padding: 48px 20px;
+  }
+  .miniImage {
+    height: 100px;
+  }
+  .characteristics__inner {
+    gap: 32px;
+  }
+  .table {
+    margin-top: 16px;
+  }
+  .miniTable {
+    padding: 16px 0;
+  }
+  .catalogue {
+    margin-top: 32px;
+  }
+  .textDivSubtitle > p > img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 960px) {
+  .bigImage {
+    height: 320px;
+  }
+  .mainTitlePage {
+    padding: 32px 20px;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .textDiv {
+    gap: 8px;
+  }
+  .textDivTitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .textDivSubtitle > p > img {
+    height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .miniImage {
+    height: 80px;
+  }
+  .section {
+    padding-top: 40px;
+  }
+  .textDivSubtitle > p, .textDivSubtitle li, .value {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .key {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .characteristicsSection {
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mainImagesDiv {
+    padding-inline: 20px;
+  }
+  .bigImage {
+    height: 233px;
+  }
+  .miniImage {
+    height: 46px;
+  }
+  .catalogue {
+    margin-top: 0;
+  }
+  .section {
+    padding-bottom: 40px;
+  }
+  .intro__inner {
+    background-color: var(--white);
+    padding: 48px 20px 28px 20px;
+  }
+  .pageTitle {
+    color: var(--black);
+    -webkit-line-clamp: 2;
+  }
+  .pageNavigation__text {
+    color: var(--black);
+  }
+  .pageNavigation__text.blue {
+    color: var(--blue);
+  }
+  .mainTitlePage {
+    display: none;
+  }
+  .miniTable {
+    gap: 24px;
+  }
+  .value {
+    text-align: end;
+  }
+  .miniImagesSection {
+    padding-inline: 33px;
+  }
+}

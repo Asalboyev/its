@@ -1,0 +1,448 @@
+header {
+  background-color: var(--black);
+}
+
+#spectechs {
+  background-color: #EDEEF0;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+}
+
+#spectechs .intro__inner {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  z-index: -1;
+}
+
+#spectechs .intro__inner > img {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  max-width: 90%;
+  margin: 0 auto;
+  max-height: 70%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+#spectechs > img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  margin: 0 auto;
+  max-height: 75%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+#spectechs .pageNavigation__text, #spectechs .pageTitle {
+  color: var(--black);
+}
+
+#spectechs  .pageNavigation__text.blue {
+  color: var(--blue);
+}
+
+#main {
+  position: relative;
+  z-index: 0;
+}
+
+.miniTextDiv {
+  padding: 112px 20px;
+}
+
+.miniTextDiv__inner {
+  max-width: 952px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.textTitle {
+  font-family: "Exo 2";
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 800;
+  color: var(--black);
+  text-transform: uppercase;
+}
+
+.miniText__textsDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.textsDiv__text p {
+  font-family: "Inter";
+  font-size: 20px;
+  line-height: 32px;
+  color: #353437;
+}
+
+.solutionsDiv {
+  position: relative;
+  z-index: -1;
+}
+
+.solutionsDiv .section__inner {
+  padding-inline: 20px;
+}
+
+.solutionsContainer {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 48px;
+}
+
+.solutionsMainText {
+  font-family: "Exo 2";
+  font-size: 40px;
+  line-height: 56px;
+  font-weight: 800;
+  color: var(--black);
+  position: relative;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.solutionsMainText::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  background-color: #A1A9EE;
+  z-index: -1;
+}
+
+.solutionCard {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.solutionCardLink {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #EBEBEB;
+  border-right: 1px solid #EBEBEB;
+  padding: 24px;
+  position: relative;
+  background-color: var(--white);
+}
+
+.solutionCardLink::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 1px solid var(--blue);
+  border-right: 1px solid var(--blue);
+  transition: .5s;
+}
+
+.solutionCardLink:hover::after {
+  width: 100%;
+  height: 100%;
+  transition: .5s;
+}
+
+.solutionCardLink:hover .readMoreDiv {
+  color: var(--blue);
+  transition: .5s;
+}
+
+.solutionInfoDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.soltuonCardTitle {
+  font-family: "Exo 2";
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 800;
+  color: var(--black);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.soltuonCardSubtitle {
+  max-height: 42px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.soltuonCardSubtitle > p {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+  color: #929292;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.solutionImageDiv {
+  position: relative;
+  width: 100%;
+  height: 276px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.solutionImageDiv img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.readMoreText {
+  font-family: "Exo 2";
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 800;
+}
+
+.readMoreDiv {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9A999B;
+  margin-top: 40px;
+  transition: .5s;
+}
+
+.readMoreArrow {
+  width: 24px;
+  height: 24px;
+}
+
+.infoTextSection .section__inner {
+  padding: 56px 20px 112px 20px;
+}
+
+.infoTextsDiv {
+  max-width: 1074px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.infoText {
+  font-family: "Inter";
+  font-size: 18px;
+  line-height: 32px;
+  color: #353437;
+}
+
+.infoTextPadding {
+  background-color: #F5F5F7;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.paddingTitle {
+  font-family: "Exo 2";
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.paddingSubtitle {
+  font-family: "Inter";
+  font-size: 16px;
+  line-height: 28px;
+  color: #353437;
+}
+
+@media (max-width: 1800px) {
+  .textsDiv__text p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .infoTextSection .section__inner {
+    padding: 55px 20px 85px 20px;
+  }
+  .infoText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .solutionImageDiv {
+    height: 220px;
+  }
+  .solutionsContainer {
+    gap: 24px;
+  }
+  #spectechs .intro__inner {
+    padding: 40px;
+  }
+  #spectechs .intro__inner > img {
+    max-height: 60%;
+  }
+  .textTitle, .solutionsMainText {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .miniTextDiv {
+    padding: 55px 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .textTitle {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .solutionsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .soltuonCardTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .solutionImageDiv {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .textTitle {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .miniTextDiv {
+    padding: 40px 20px 55px 20px;
+  }
+  .miniTextDiv__inner {
+    gap: 12px;
+  }
+  .textsDiv__text p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .solutionsMainText {
+    font-size: 20px;
+    line-height: 30px;
+    width: 100%;
+    text-align: center;
+  }
+  .solutionsMainText::after {
+    display: none;
+  }
+  .solutionCardLink {
+    padding: 14px 4px;
+  }
+  .infoTextSection .section__inner {
+    padding: 40px 20px 55px 20px;
+  }
+  .soltuonCardTitle, .soltuonCardSubtitle {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .readMoreText {
+    font-size: 18px;
+    line-height: 32px;
+  }
+  .readMoreDiv {
+    margin-top: 30px;
+  }
+  .readMoreArrow {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  #spectechs {
+    height: 400px;
+  }
+  #spectechs .intro__inner > img {
+    max-height: 160px;
+    max-width: 100%;
+    left: 0;
+    bottom: 16px;
+  }
+  #spectechs > img {
+    max-height: 200px;
+    height: 100%;
+  }
+  #spectechs .intro__inner {
+    padding: 48px 20px;
+  }
+  .textTitle {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .solutionsContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .solutionImageDiv {
+    height: 260px;
+  }
+  .solutionImageDiv {
+    margin-top: 24px;
+  }
+  .solutionImageDiv img {
+    object-fit: fill;
+  }
+  .infoTextPadding {
+    padding: 16px;
+  }
+  .paddingTitle {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .paddingSubtitle {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  #spectechs > img {
+    max-height: 300px;
+  }
+  .solutionImageDiv {
+    height: 220px;
+  }
+}
