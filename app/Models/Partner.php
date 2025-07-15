@@ -20,7 +20,7 @@ class Partner extends Model
 
     protected $casts = [
         'title' => 'array',
-        'desc' => 'array'
+        'address' => 'array'
     ];
 
     protected $appends = [
