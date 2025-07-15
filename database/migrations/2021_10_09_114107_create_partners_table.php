@@ -17,8 +17,10 @@ class CreatePartnersTable extends Migration
             $table->id();
             $table->text('title')->nullable();
             $table->string('link')->nullable();
-            $table->string('img');
-            $table->text('desc')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
+            $table->string('img')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }

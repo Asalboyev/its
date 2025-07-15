@@ -82,7 +82,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('members', MemberController::class);
 
     // partners
-    Route::resource('partners', PartnerController::class);
+    Route::resource('contacts', PartnerController::class);
 
     // FAQ
     Route::resource('questions', QuestionController::class);

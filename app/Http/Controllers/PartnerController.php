@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
-    public $title = 'Партнеры';
-    public $route_name = 'partners';
-    public $route_parameter = 'partner';
+    public $title = 'Контакт';
+    public $route_name = 'contacts';
+    public $route_parameter = 'contact';
     /**
      * Display a listing of the resource.
      *
@@ -75,7 +75,7 @@ class PartnerController extends Controller
 
         Partner::create($data);
 
-        return redirect()->route('partners.index')->with([
+        return redirect()->route('contacts.index')->with([
             'success' => true,
             'message' => 'Успешно сохранен'
         ]);
@@ -98,9 +98,12 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Partner $partner)
+
+    public function edit($id)
     {
         $langs = Lang::all();
+        $partner = Partner::find($id);
+
 
         return view('app.partners.edit', [
             'title' => $this->title,
@@ -118,19 +121,12 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'title.'.$this->main_lang->code => 'required'
-        ]);
-        if ($validator->fails()) {
-            return back()->withInput()->with([
-                'success' => false,
-                'message' => 'Ошибка валидации'
-            ]);
-        }
+
+        $partner = Partner::find($id);
 
         if (isset($data['dropzone_images'])) {
             $data['img'] = $data['dropzone_images'];
@@ -138,11 +134,12 @@ class PartnerController extends Controller
             $data['img'] = null;
         }
 
+
         $partner->update($data);
 
-        return redirect()->route('partners.index')->with([
+        return redirect()->route('contacts.index')->with([
             'success' => true,
-            'message' => 'Успешно сохранен'
+            'message' => 'Успешно сохранено'
         ]);
     }
 
@@ -152,13 +149,24 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy($id)
     {
+        // Sertifikatni id orqali topish
+        $partner = Partner::find($id);
+
+        // Agar sertifikat mavjud bo'lmasa, xatolik xabarini ko'rsatish
+        if (!$partner) {
+            return back()->with([
+                'success' => false,
+                'message' => 'что найдено'
+            ]);
+        }
+
+        // Sertifikatni o'chirish
         $partner->delete();
 
+        // Qayta yo'naltirish va muvaffaqiyat xabarini ko'rsatish
         return back()->with([
             'success' => true,
-            'message' => 'Успешно удален'
-        ]);
-    }
-}
+            'message' => 'Успешно удалено'
+        ]);}}

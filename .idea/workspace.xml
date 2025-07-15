@@ -189,10 +189,27 @@
       <workItem from="1750256882572" duration="2283000" />
       <workItem from="1750284458326" duration="819000" />
       <workItem from="1752141132444" duration="4769000" />
+      <workItem from="1752183899624" duration="683000" />
+      <workItem from="1752354462572" duration="125000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Api/ApiController.php</url>
+          <line>72</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Api\ApiController" />
+            <option name="methodName" value="key" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

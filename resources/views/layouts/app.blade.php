@@ -330,6 +330,11 @@
                         </a>
                     </li>
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('admin/contacts') || request()->is('admin/contacts/*') ? 'active' : '' }}" href="{{ route('contacts.index') }}">
+                            <i class="fe fe-file-text"></i> Контакт
+                        </a>
+                    </li>
                     @if($menu_items->where('route', 'certificates')->where('is_active', 1)->first())
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('admin/certificates') || request()->is('admin/certificates/*') ? 'active' : '' }}" href="{{ route('certificates.index') }}">

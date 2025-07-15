@@ -10,10 +10,12 @@ class Partner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'link', 
+        'link',
+        'phone_number',
         'img',
-        'title', 
-        'desc'
+        'email',
+        'title',
+        'address'
     ];
 
     protected $casts = [

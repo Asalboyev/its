@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdditionalFunction;
 use App\Models\Brand;
 use App\Models\DocumentCategory;
+use App\Models\Partner;
 use App\Models\Service;
 use App\Models\Vacancy;
 use App\Models\Certificate;
@@ -69,6 +70,52 @@ class ApiController extends Controller
             'prev_page_url' => $banners->previousPageUrl(),
         ]);
     }
+
+    public function get_contact_info()
+    {
+        // Foydalanuvchi tilini olish
+        $locale = App::getLocale();
+
+        // Postlarni oxirgi qo'shilganidan boshlab olish va 10 tadan paginate qilish
+        $member = Partner::latest()->paginate(500);
+
+        // Agar postlar topilmasa, 404 xatolikni qaytaradi
+        if ($member->isEmpty()) {
+            return response()->json([
+                'message' => 'No records found'
+            ], 404);
+        }
+
+        // Postlarni foydalanuvchi tiliga moslashtirish
+        $translatedPosts = collect($member->items())->map(function ($banner) use ($locale) {
+            return [
+                'id' => $banner->id,
+                'title' => $banner->title[$locale] ?? null,
+                'address' => $banner->address[$locale] ?? null,
+                'email' => $banner->email ?? null,
+                'phone_number' => $banner->phone_number ?? null,
+                'map_link' => $banner->link ?? null,
+                'photo' => [
+                    'lg' => $banner->img ? url('/upload/images/' . $banner->img) : null,
+                    'md' => $banner->img ? url('/upload/images/600/' . $banner->img) : null,
+                    'sm' => $banner->img ? url('/upload/images/200/' . $banner->img) : null,
+                ],
+
+            ];
+        });
+
+        // Postlar va paginate ma'lumotlarini JSON formatida qaytarish
+        return response()->json([
+            'data' => $translatedPosts,             // Tilga mos postlar
+            'total' => $member->total(),             // Umumiy postlar soni
+            'per_page' => $member->perPage(),        // Har bir sahifadagi postlar soni
+            'current_page' => $member->currentPage(), // Hozirgi sahifa raqami
+            'last_page' => $member->lastPage(),      // Oxirgi sahifa raqami
+            'next_page_url' => $member->nextPageUrl(), // Keyingi sahifa URLi
+            'prev_page_url' => $member->previousPageUrl(), // Oldingi sahifa URLi
+        ]);
+    }
+
 
     public function key()
     {
