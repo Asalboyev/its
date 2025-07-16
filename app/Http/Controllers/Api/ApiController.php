@@ -685,7 +685,7 @@ class ApiController extends Controller
         $locale = App::getLocale();
 
         $categories = ProductsCategory::whereNull('parent_id')
-            ->with(['children', 'products.productImages']) // productImages ham yuklanadi
+            ->with(['children', 'products.productImages'])
             ->latest()
             ->paginate(10);
 
@@ -710,11 +710,9 @@ class ApiController extends Controller
                 'slug' => $category->slug,
             ];
 
-            // Agar child bor bo‘lsa - rekursiv chaqiramiz
             if ($category->children->isNotEmpty()) {
                 $mapped['children'] = $category->children->map(fn($child) => $mapCategory($child));
             } else {
-                // Agar child yo‘q bo‘lsa - products ni qo‘shamiz
                 $mapped['products'] = [
                     'data' => $category->products->map(function ($product) use ($locale) {
                         return [
@@ -740,6 +738,15 @@ class ApiController extends Controller
 
             return $mapped;
         };
+
+        return response()->json([
+            'data' => $categories->getCollection()->map($mapCategory),
+            'meta' => [
+                'current_page' => $categories->currentPage(),
+                'last_page' => $categories->lastPage(),
+                'total' => $categories->total(),
+            ]
+        ], 200);
     }
 
     public function show_categories($slug)
