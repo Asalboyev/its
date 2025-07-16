@@ -50,7 +50,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Название</th>
-                            <th scope="col">Сертификат</th>
+                            <th scope="col">Фото</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>

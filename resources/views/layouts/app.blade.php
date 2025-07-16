@@ -275,7 +275,7 @@
                         <a class="nav-link" href="#company" data-bs-toggle="collapse" role="button" aria-expanded="{{ request()->is('admin/feedbacks') || request()->is('admin/feedbacks/*') || request()->is('admin/members') || request()->is('admin/members/*') || request()->is('admin/partners') || request()->is('admin/partners/*') || request()->is('admin/questions') || request()->is('admin/questions/*') || request()->is('admin/works') || request()->is('admin/works/*') || request()->is('admin/vacancies') || request()->is('admin/vacancies/*') ? 'true' : 'false' }}" aria-controls="documents">
                             <i class="fe fe-star"></i> Компания
                         </a>
-                        <div class="collapse {{ request()->is('admin/feedbacks') || request()->is('admin/feedbacks/*') || request()->is('admin/members') || request()->is('admin/members/*') || request()->is('admin/partners') || request()->is('admin/partners/*') || request()->is('admin/questions') || request()->is('admin/questions/*') || request()->is('admin/works') || request()->is('admin/works/*') || request()->is('admin/vacancies') || request()->is('admin/vacancies/*') ? 'show' : '' }}" id="company">
+                        <div class="collapse {{ request()->is('admin/feedbacks') || request()->is('admin/feedbacks/*') || request()->is('admin/members') || request()->is('admin/members/*')  || request()->is('admin/questions') || request()->is('admin/questions/*') || request()->is('admin/works') || request()->is('admin/works/*') || request()->is('admin/vacancies') || request()->is('admin/vacancies/*') ? 'show' : '' }}" id="company">
                             <ul class="nav nav-sm flex-column">
                                 @if($menu_items->where('route', 'feedbacks')->where('is_active', 1)->first())
                                 <li class="nav-item">
@@ -291,13 +291,7 @@
                                     </a>
                                 </li>
                                 @endif
-                                @if($menu_items->where('route', 'partners')->where('is_active', 1)->first())
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('admin/partners') || request()->is('admin/partners/*') ? 'active' : '' }}" href="{{ route('partners.index') }}">
-                                        Партнеры
-                                    </a>
-                                </li>
-                                @endif
+
                                 @if($menu_items->where('route', 'works')->where('is_active', 1)->first())
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->is('admin/works') || request()->is('admin/works/*') ? 'active' : '' }}" href="{{ route('works.index') }}">
@@ -338,7 +332,7 @@
                     @if($menu_items->where('route', 'certificates')->where('is_active', 1)->first())
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('admin/certificates') || request()->is('admin/certificates/*') ? 'active' : '' }}" href="{{ route('certificates.index') }}">
-                            <i class="fe fe-award"></i> Сертификаты
+                            <i class="fe fe-award"></i> Seamless
                         </a>
                     </li>
                     @endif

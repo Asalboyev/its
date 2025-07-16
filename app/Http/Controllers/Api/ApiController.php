@@ -7,6 +7,7 @@ use App\Models\AdditionalFunction;
 use App\Models\Brand;
 use App\Models\DocumentCategory;
 use App\Models\Partner;
+use App\Models\Question;
 use App\Models\Service;
 use App\Models\Vacancy;
 use App\Models\Certificate;
@@ -56,6 +57,41 @@ class ApiController extends Controller
                     'md' => $banner->md_img,
                     'sm' => $banner->sm_img,
                 ],
+            ];
+        });
+
+        // JSON formatida qaytarish
+        return response()->json([
+            'data' => $translatedPosts,
+            'total' => $banners->total(),
+            'per_page' => $banners->perPage(),
+            'current_page' => $banners->currentPage(),
+            'last_page' => $banners->lastPage(),
+            'next_page_url' => $banners->nextPageUrl(),
+            'prev_page_url' => $banners->previousPageUrl(),
+        ]);
+    }
+    public function get_faq()
+    {
+        // Foydalanuvchi tilini olish
+        $locale = App::getLocale();
+
+        // Faqat key ustuni null bo'lgan bannerlarni olish va paginate qilish
+        $banners = Question::latest()->paginate(50);
+
+        // Agar postlar topilmasa, 404 xatolikni qaytaradi
+        if ($banners->isEmpty()) {
+            return response()->json([
+                'message' => 'No records found'
+            ], 404);
+        }
+
+        // Postlarni foydalanuvchi tiliga moslashtirish
+        $translatedPosts = collect($banners->items())->map(function ($banner) use ($locale) {
+            return [
+                'id' => $banner->id,
+                'question' => $banner->question[$locale] ?? null,
+                'answer' => $banner->answer[$locale] ?? null,
             ];
         });
 
@@ -322,6 +358,47 @@ class ApiController extends Controller
         return response()->json($translations);
     }
 
+    public function get_seamless()
+    {
+        // Foydalanuvchi tilini olish
+        $locale = App::getLocale();
+
+        // Postlarni oxirgi qo'shilganidan boshlab olish va 10 tadan paginate qilish
+        $member = Certificate::latest()->paginate(10);
+
+        // Agar postlar topilmasa, 404 xatolikni qaytaradi
+        if ($member->isEmpty()) {
+            return response()->json([
+                'message' => 'No records found'
+            ], 404);
+        }
+
+        // Postlarni foydalanuvchi tiliga moslashtirish
+        $translatedPosts = collect($member->items())->map(function ($banner) use ($locale) {
+            return [
+                'id' => $banner->id,
+                'title' => $banner->title[$locale] ?? null,
+                'desc' => $banner->desc[$locale] ?? null,
+                'images' => [
+                    'lg' => $banner->lg_img, // Katta rasm uchun URL
+                    'md' => $banner->md_img, // O‘rta rasm uchun URL
+                    'sm' => $banner->sm_img, // Kichik rasm uchun URL
+                ],
+
+            ];
+        });
+
+        // Postlar va paginate ma'lumotlarini JSON formatida qaytarish
+        return response()->json([
+            'data' => $translatedPosts,             // Tilga mos postlar
+            'total' => $member->total(),             // Umumiy postlar soni
+            'per_page' => $member->perPage(),        // Har bir sahifadagi postlar soni
+            'current_page' => $member->currentPage(), // Hozirgi sahifa raqami
+            'last_page' => $member->lastPage(),      // Oxirgi sahifa raqami
+            'next_page_url' => $member->nextPageUrl(), // Keyingi sahifa URLi
+            'prev_page_url' => $member->previousPageUrl(), // Oldingi sahifa URLi
+        ]);
+    }
     public function get_team()
     {
         // Foydalanuvchi tilini olish
@@ -607,8 +684,10 @@ class ApiController extends Controller
     {
         $locale = App::getLocale();
 
-        // Asosiy kategoriyalarni olish (faqat parent_id = null bo'lganlar)
-        $categories = ProductsCategory::whereNull('parent_id')->with('children')->latest()->paginate(10);
+        $categories = ProductsCategory::whereNull('parent_id')
+            ->with(['children', 'products.productImages']) // productImages ham yuklanadi
+            ->latest()
+            ->paginate(10);
 
         if ($categories->isEmpty()) {
             return response()->json([
@@ -616,9 +695,8 @@ class ApiController extends Controller
             ], 404);
         }
 
-        // Rekursiv funksiya: barcha `children` larni chuqurlik bilan olish
         $mapCategory = function ($category) use ($locale, &$mapCategory) {
-            return [
+            $mapped = [
                 'id' => $category->id,
                 'title' => $category->title[$locale] ?? null,
                 'desc' => $category->desc[$locale] ?? null,
@@ -630,22 +708,38 @@ class ApiController extends Controller
                 'in_main' => $category->in_main,
                 'view' => $category->view,
                 'slug' => $category->slug,
-                'children' => $category->children->map(fn($child) => $mapCategory($child)), // Rekursiv chaqirish
             ];
+
+            // Agar child bor bo‘lsa - rekursiv chaqiramiz
+            if ($category->children->isNotEmpty()) {
+                $mapped['children'] = $category->children->map(fn($child) => $mapCategory($child));
+            } else {
+                // Agar child yo‘q bo‘lsa - products ni qo‘shamiz
+                $mapped['products'] = [
+                    'data' => $category->products->map(function ($product) use ($locale) {
+                        return [
+                            'id' => $product->id,
+                            'title' => $product->title[$locale] ?? $product->title,
+                            'description' => $product->desc[$locale] ?? $product->desc,
+                            'info' => $product->info[$locale] ?? null,
+                            'slug' => $product->slug,
+                            'images' => $product->productImages->map(function ($image) {
+                                return [
+                                    'lg' => $image->lg_img,
+                                    'md' => $image->md_img,
+                                    'sm' => $image->sm_img,
+                                ];
+                            }),
+                            'meta_keywords' => $product->meta_keywords[$locale] ?? $product->meta_keywords,
+                            'meta_desc' => $product->meta_desc[$locale] ?? $product->meta_desc,
+                            'stock' => $product->stock,
+                        ];
+                    }),
+                ];
+            }
+
+            return $mapped;
         };
-
-        // Asosiy kategoriyalarni map qilish
-        $translatedPosts = collect($categories->items())->map(fn($category) => $mapCategory($category));
-
-        return response()->json([
-            'data' => $translatedPosts,              // Tilga mos kategoriyalar
-            'total' => $categories->total(),        // Umumiy kategoriyalar soni
-            'per_page' => $categories->perPage(),   // Har bir sahifadagi kategoriyalar soni
-            'current_page' => $categories->currentPage(), // Hozirgi sahifa raqami
-            'last_page' => $categories->lastPage(), // Oxirgi sahifa raqami
-            'next_page_url' => $categories->nextPageUrl(), // Keyingi sahifa URLi
-            'prev_page_url' => $categories->previousPageUrl(), // Oldingi sahifa URLi
-        ]);
     }
 
     public function show_categories($slug)

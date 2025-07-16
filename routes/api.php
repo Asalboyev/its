@@ -40,6 +40,8 @@ Route::middleware('locale')->group(function () {
 
 
     Route::get('/translations', [ApiController::class, 'translations']);
+    Route::get('/faq', [ApiController::class, 'get_faq']);
+    Route::get('/seamless', [ApiController::class, 'get_seamless']);
     Route::get('/teams', [ApiController::class, 'get_team']);
     Route::get('/teams/{id}', [ApiController::class, 'show_team']);
 

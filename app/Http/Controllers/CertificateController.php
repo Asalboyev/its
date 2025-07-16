@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
-    public $title = 'Сертификаты';
+    public $title = 'Seamless';
     public $route_name = 'certificates';
     public $route_parameter = 'certificate';
     /**
