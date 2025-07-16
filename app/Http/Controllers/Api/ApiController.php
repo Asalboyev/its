@@ -691,6 +691,8 @@ class ApiController extends Controller
 
         if ($categories->isEmpty()) {
             return response()->json([
+                'data' => [],
+                'meta' => null,
                 'message' => 'No records found'
             ], 404);
         }
@@ -698,8 +700,8 @@ class ApiController extends Controller
         $mapCategory = function ($category) use ($locale, &$mapCategory) {
             $mapped = [
                 'id' => $category->id,
-                'title' => $category->title[$locale] ?? null,
-                'desc' => $category->desc[$locale] ?? null,
+                'title' => $category->title[$locale] ?? $category->title,
+                'desc' => $category->desc[$locale] ?? $category->desc,
                 'images' => [
                     'lg' => $category->lg_img,
                     'md' => $category->md_img,
@@ -719,7 +721,7 @@ class ApiController extends Controller
                             'id' => $product->id,
                             'title' => $product->title[$locale] ?? $product->title,
                             'description' => $product->desc[$locale] ?? $product->desc,
-                            'info' => $product->info[$locale] ?? null,
+                            'info' => $product->info[$locale] ?? $product->info,
                             'slug' => $product->slug,
                             'images' => $product->productImages->map(function ($image) {
                                 return [
