@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="slug" class="form-label">Slug</label>
-                                    <input type="text"  class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $product->slug ?? null }}" id="slug" placeholder="slug...">
+                                    <input type="text"  class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $brand->slug ?? null }}" id="slug" placeholder="slug...">
 
                                     @error('slug')
                                     <span class="invalid-feedback" role="alert">
