@@ -194,6 +194,16 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="slug" class="form-label">Slug</label>
+                                    <input type="text"  class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $product->slug ?? null }}" id="slug" placeholder="slug...">
+
+                                    @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="dropzone" class="form-label">Лого</label>
                                     <div class="dropzone dropzone-multiple" id="dropzone"></div>
                                 </div>

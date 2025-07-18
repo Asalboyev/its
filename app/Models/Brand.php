@@ -14,6 +14,7 @@ class Brand extends Model
         'url',
         'img',
         'key',
+        'slug',
         'desc'
     ];
 

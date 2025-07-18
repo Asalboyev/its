@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Lang;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -67,6 +69,10 @@ class BrandController extends Controller
             $data['url'] = $videoPath;
         }
 
+        $data['slug'] = Str::slug($data['title'][$this->main_lang->code], '-');
+        if(Brand::where('slug', $data['slug'])->exists()) {
+            $data['slug'] = $data['slug'].'-'.time();
+        }
         // Dropzone rasmlari bo‘lsa, ularni qo‘shish
         if (isset($data['dropzone_images'])) {
             $data['img'] = $data['dropzone_images'];
